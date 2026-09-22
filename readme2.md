@@ -13,13 +13,9 @@ Nesta instrução, vamos falar especialmente de **mapeamento de redes locais usa
 
 Ao final desta instrução, você deverá ser capaz de:
 
-1. Diferenciar PAN, LAN, MAN e WAN pela abrangência geográfica;
-2. Explicar a função de cada camada do Modelo OSI e relacioná-las ao modelo TCP/IP usado na Internet;
-3. Comparar TCP e UDP e escolher o mais adequado para uma aplicação;
-4. Reconhecer as principais topologias e explicar por que a estrela (e a estrela estendida) domina as redes locais;
-5. Comparar IPv4 e IPv6;
-6. Dado um endereço IPv4 em notação CIDR, calcular a máscara, o endereço de rede, o primeiro e o último endereço utilizável, o broadcast e a quantidade de hosts;
-7. Verificar se sub-redes pertencem a uma VPC e propor a divisão de um bloco CIDR para o seu projeto.
+1. Diferenciar os tipos de rede (PAN, LAN, MAN e WAN) pela abrangência geográfica e reconhecer as principais topologias, explicando por que a estrela e a estrela estendida dominam as redes locais;
+2. Explicar a função de cada camada do Modelo OSI e relacioná-las ao modelo TCP/IP, comparando os protocolos de transporte (TCP e UDP) e de rede (IPv4 e IPv6) para escolher o mais adequado a cada situação;
+3. Calcular, a partir de um endereço IPv4 em notação CIDR, a máscara, o endereço de rede, o primeiro e o último endereço utilizável, o broadcast e a quantidade de hosts, aplicando esses cálculos para verificar se sub-redes pertencem a uma VPC e propor a divisão de um bloco CIDR no seu projeto.
 
 ## Pré-requisitos
 
