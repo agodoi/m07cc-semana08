@@ -547,29 +547,6 @@ Agora o "octeto interessante" é o **terceiro**.
 </details>
 
 
-## Confira suas respostas com Python
-
-Você é da Computação: não precisa confiar só na conta de cabeça. O módulo `ipaddress`, que já vem com o Python, faz os mesmos cálculos. Use-o para **conferir** o que você calculou à mão, não para substituir o raciocínio (no Kahoot não vai ter Python).
-
-```python
-import ipaddress
-
-rede = ipaddress.ip_network("172.16.1.43/28", strict=False)
-hosts = list(rede.hosts())
-
-print("Máscara:          ", rede.netmask)
-print("Endereço de rede: ", rede.network_address)
-print("1º endereço útil: ", hosts[0])
-print("Broadcast:        ", rede.broadcast_address)
-print("Último útil:      ", hosts[-1])
-print("Hosts possíveis:  ", len(hosts))
-```
-
-O parâmetro `strict=False` permite passar um endereço de host (como o `.43`); o Python calcula a rede sozinho. Também dá para testar se uma sub-rede está dentro de outra com `subnet_of()`, guarde essa dica para a questão **g** logo abaixo.
-
-Para ver o endereço e a máscara do seu próprio computador: `ip addr` (Linux), `ifconfig` (macOS) ou `ipconfig` (Windows).
-
-
 # Agora pense!
 
 Numa das instruções, você criou uma VPC 192.168.0.0/22.
@@ -697,39 +674,3 @@ Repare que a sua VPC, 192.168.0.0/22, é um pedaço da faixa 192.168.0.0/16.
 
 
 # Kahoot!
-
-Link: *(a ser inserido pelo professor)*
-
-
-## Referências
-
-- AMAZON WEB SERVICES. **Subnet CIDR blocks**. Amazon VPC User Guide. Disponível em: https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html. Acesso em: 22 set. 2026.
-- DEERING, S.; HINDEN, R. **RFC 8200**: Internet Protocol, Version 6 (IPv6) Specification. IETF, 2017. Disponível em: https://www.rfc-editor.org/rfc/rfc8200.
-- EDDY, W. (ed.). **RFC 9293**: Transmission Control Protocol (TCP). IETF, 2022. Disponível em: https://www.rfc-editor.org/rfc/rfc9293.
-- FULLER, V.; LI, T. **RFC 4632**: Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan. IETF, 2006. Disponível em: https://www.rfc-editor.org/rfc/rfc4632.
-- ISO/IEC. **ISO/IEC 7498-1:1994**: Information technology (Open Systems Interconnection) Basic Reference Model: The Basic Model. Genebra: ISO, 1994.
-- KUROSE, J. F.; ROSS, K. W. **Redes de computadores e a Internet**: uma abordagem top-down. 6. ed. São Paulo: Pearson, 2013.
-- KUROSE, J. F.; ROSS, K. W. **Computer networking**: a top-down approach. 8th ed. Hoboken: Pearson, 2020.
-- MOGUL, J.; POSTEL, J. **RFC 950**: Internet Standard Subnetting Procedure. IETF, 1985. Disponível em: https://www.rfc-editor.org/rfc/rfc950.
-- NIC.br. **IPv6.br**. Disponível em: https://ipv6.br/. Acesso em: 22 set. 2026.
-- POSTEL, J. **RFC 768**: User Datagram Protocol. IETF, 1980. Disponível em: https://www.rfc-editor.org/rfc/rfc768.
-- POSTEL, J. (ed.). **RFC 791**: Internet Protocol. IETF, 1981. Disponível em: https://www.rfc-editor.org/rfc/rfc791.
-- PYTHON SOFTWARE FOUNDATION. **ipaddress — IPv4/IPv6 manipulation library**. Disponível em: https://docs.python.org/3/library/ipaddress.html. Acesso em: 22 set. 2026.
-- REKHTER, Y. *et al.* **RFC 1918**: Address Allocation for Private Internets. IETF, 1996. Disponível em: https://www.rfc-editor.org/rfc/rfc1918.
-- TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. **Computer networks**. 6th ed. Hoboken: Pearson, 2021.
-
-
-
-## 5. Conferência dos gabaritos
-
-| Exercício | Máscara | Rede | 1º útil | Broadcast | Último útil | Hosts | Hosts na AWS | Original |
-|-|-|-|-|-|-|-|-|-|
-| Ex. 01 — 10.0.0.0/26 | 255.255.255.192 | 10.0.0.0 | 10.0.0.1 | 10.0.0.63 | 10.0.0.62 | 62 | 59 | Correto |
-| Ex. 02 — 172.16.1.43/28 | 255.255.255.240 | 172.16.1.32 | 172.16.1.33 | 172.16.1.47 | 172.16.1.46 | 14 | 11 | Correto |
-| Ex. 03 — 10.0.8.0/21 | 255.255.248.0 | 10.0.8.0 | 10.0.8.1 | 10.0.15.255 | 10.0.15.254 | 2.046 | 2.043 | Correto |
-| Ex. 04 — 10.0.128.0/17 | 255.255.128.0 | 10.0.128.0 | 10.0.128.1 | 10.0.255.255 | 10.0.255.254 | 32.766 | 32.763 | Correto |
-| Ex. 05 — 10.0.1.64/26 | 255.255.255.192 | 10.0.1.64 | 10.0.1.65 | 10.0.1.127 | 10.0.1.126 | 62 | 59 | Correto |
-| VPC — 192.168.0.0/22 | 255.255.252.0 | 192.168.0.0 | 192.168.0.1 | 192.168.3.255 | 192.168.3.254 | 1.022 | — | Sem gabarito no original (inserido) |
-| Pública — 192.168.0.0/24 | 255.255.255.0 | 192.168.0.0 | 192.168.0.1 | 192.168.0.255 | 192.168.0.254 | 254 | 251 | Sem gabarito no original (inserido) |
-| Privada — 192.168.1.0/24 | 255.255.255.0 | 192.168.1.0 | 192.168.1.1 | 192.168.1.255 | 192.168.1.254 | 254 | 251 | Sem gabarito no original (inserido) |
-| Desafio — faixas privadas | — | 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 | — | — | — | — | — | Sem gabarito no original (inserido) |
