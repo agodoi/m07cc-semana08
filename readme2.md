@@ -262,7 +262,7 @@ As classes ainda aparecem em nomes de faixas e em provas de certificação, por 
 | `127.0.0.0/8` | *loopback*: o próprio host (`127.0.0.1` é o `localhost`) |
 | `169.254.0.0/16` | *link-local*: autoconfiguração quando o DHCP falha; na AWS, `169.254.169.254` é o serviço de metadados da instância |
 | `0.0.0.0/0` | "qualquer endereço": aparece como **rota padrão** nas tabelas de rotas e como origem nas regras de security group |
-| `100.64.0.0/10` | faixa compartilhada usada por provedores de Internet com (CGNAT)[https://github.com/agodoi/m07cc-semana08/blob/main/doc/cgnat.md] (RFC 6598) |
+| `100.64.0.0/10` | faixa compartilhada usada por provedores de Internet com [CGNAT](https://github.com/agodoi/m07cc-semana08/blob/main/doc/cgnat.md) (RFC 6598) |
 | Faixas privadas (RFC 1918) | uso interno em qualquer organização, você vai descobrir o CIDR delas no **Desafio**, no final |
 
 ## Basicamente, o que você precisa saber pra dominar esse trem?
