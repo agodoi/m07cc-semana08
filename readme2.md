@@ -263,7 +263,7 @@ As classes ainda aparecem em nomes de faixas e em provas de certificação, por 
 | `169.254.0.0/16` | *link-local*: autoconfiguração quando o DHCP falha; na AWS, `169.254.169.254` é o serviço de metadados da instância |
 | `0.0.0.0/0` | "qualquer endereço": aparece como **rota padrão** nas tabelas de rotas e como origem nas regras de security group |
 | `100.64.0.0/10` | faixa compartilhada usada por provedores de Internet com CGNAT (RFC 6598) |
-| Faixas privadas (RFC 1918) | uso interno em qualquer organização — você vai descobrir o CIDR delas no **Desafio**, no final |
+| Faixas privadas (RFC 1918) | uso interno em qualquer organização, você vai descobrir o CIDR delas no **Desafio**, no final |
 
 ## Basicamente, o que você precisa saber pra dominar esse trem?
 
@@ -485,7 +485,7 @@ Agora o "octeto interessante" é o **terceiro**.
 * Rede: 10.0.8.0; broadcast: terceiro octeto 15 e quarto octeto todo em 1 → 10.0.15.255;
 * Hosts: 2<sup>11</sup> − 2 = 2048 − 2 = **2046**.
 
-> **Pegadinha:** aqui, endereços como 10.0.8.255 e 10.0.9.0 são **hosts válidos**. Um endereço terminado em 255 ou em 0 só é broadcast ou rede se todos os bits de host forem 1 ou 0 — e, num /21, os bits de host começam no terceiro octeto.
+> **Pegadinha:** aqui, endereços como 10.0.8.255 e 10.0.9.0 são **hosts válidos**. Um endereço terminado em 255 ou em 0 só é broadcast ou rede se todos os bits de host forem 1 ou 0 e, num /21, os bits de host começam no terceiro octeto.
 
 </details>
 
