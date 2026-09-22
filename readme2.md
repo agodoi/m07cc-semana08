@@ -25,7 +25,7 @@ Ao final desta instrução, você deverá ser capaz de:
 # Vantagens no seu projeto
 
 * Organizar suas aplicações em sub-redes privadas e seguras;
-* Entender como a separação entre sub-rede pública e sub-rede privada protege a sub-rede privada — e o que de fato faz esse isolamento: as **tabelas de rotas**, o **Internet Gateway**, o **NAT Gateway**, os **security groups** e as **ACLs de rede**;
+* Entender como a separação entre sub-rede pública e sub-rede privada protege a sub-rede privada, e o que de fato faz esse isolamento: as **tabelas de rotas**, o **Internet Gateway**, o **NAT Gateway**, os **security groups** e as **ACLs de rede**;
 * Entender o mapeamento dessas sub-redes dentro da VPC que você criou para a empresa parceira.
 
 ## Tipos de redes por abrangência
@@ -56,7 +56,7 @@ Pense numa encomenda: você coloca o presente numa caixa (dados), a caixa vai nu
 
 O Modelo **OSI** (*Open Systems Interconnection*, padronizado pela ISO na norma ISO/IEC 7498-1) possui **7 camadas**. Ele é um **modelo de referência**, isto é, conceitual: organiza as funções de uma rede em camadas para facilitar o estudo, o projeto e a solução de problemas ("o problema é de camada 1 ou de camada 3?").
 
-Os protocolos da Internet não seguem o OSI à risca — eles seguem o **modelo TCP/IP**, que você verá logo abaixo. Mas as funções descritas em cada camada existem de verdade e são implementadas em algum lugar: as camadas 1 e 2 ficam principalmente na **placa de rede** (NIC) e no seu *driver*; as camadas 3 e 4, no **sistema operacional**; as camadas 5, 6 e 7, na própria **aplicação** e em suas bibliotecas.
+Os protocolos da Internet não seguem o OSI à risca, eles seguem o **modelo TCP/IP**, que você verá logo abaixo. Mas as funções descritas em cada camada existem de verdade e são implementadas em algum lugar: as camadas 1 e 2 ficam principalmente na **placa de rede** (NIC) e no seu *driver*; as camadas 3 e 4, no **sistema operacional**; as camadas 5, 6 e 7, na própria **aplicação** e em suas bibliotecas.
 
 <img src="imgs/modelo_osi.png" width="500" alt="Pilha das 7 camadas do Modelo OSI com exemplos de protocolos em cada camada">
 
@@ -70,7 +70,7 @@ Os protocolos da Internet não seguem o OSI à risca — eles seguem o **modelo 
 
 * **Camada 07 - Aplicação:** oferece serviços de rede diretamente às aplicações, por meio de protocolos como HTTP, DNS, SMTP e FTP. **Atenção:** ela **não** é "tudo o que aparece na sua tela". A tela (a interface gráfica) é responsabilidade do programa; o navegador é o programa, e o **HTTP** que ele usa para buscar a página é o protocolo de camada de aplicação;
 * **Camada 06 - Apresentação:** é o **tradutor**. Define como os dados são representados para que os dois lados se entendam: codificação de caracteres (UTF-8), formatos de mídia (JPEG, MP3), serialização (JSON, XML), compressão e **criptografia/descriptografia**. Na Internet, essas funções normalmente ficam dentro da própria aplicação ou de bibliotecas como a do TLS;
-* **Camada 05 - Sessão:** organiza o **diálogo** entre dois hosts: estabelece, mantém, sincroniza e encerra a sessão. É como uma **sessão de cinema**, que tem hora para começar e para acabar — com uma diferença importante: na rede, a duração **não é fixa**. A sessão dura enquanto as partes precisarem conversar, ou até ser encerrada por inatividade (*timeout*). Exemplos de funções de sessão: manter o seu login ativo enquanto você navega, encerrá-lo depois de um tempo parado e retomar uma transferência grande a partir de um ponto de controle (*checkpoint*). No mundo TCP/IP, essas funções costumam ser implementadas pela própria aplicação (por exemplo, com cookies e tokens de login);
+* **Camada 05 - Sessão:** organiza o **diálogo** entre dois hosts: estabelece, mantém, sincroniza e encerra a sessão. É como uma **sessão de cinema**, que tem hora para começar e para acabar, com uma diferença importante: na rede, a duração **não é fixa**. A sessão dura enquanto as partes precisarem conversar, ou até ser encerrada por inatividade (*timeout*). Exemplos de funções de sessão: manter o seu login ativo enquanto você navega, encerrá-lo depois de um tempo parado e retomar uma transferência grande a partir de um ponto de controle (*checkpoint*). No mundo TCP/IP, essas funções costumam ser implementadas pela própria aplicação (por exemplo, com cookies e tokens de login);
 * **Camada 04 - Transporte:** é a camada de transferência de dados **fim a fim** entre **processos** (aplicações) nos hosts, identificados por **portas**. É o **frete**: recebe os dados da aplicação, divide-os em **segmentos** e os entrega ao processo certo no destino. É a casa do **TCP** e do **UDP**. O TCP oferece entrega **confiável** (confirma o recebimento, retransmite o que se perdeu e reordena o que chegou fora de ordem); o UDP transporta sem essas garantias, em troca de menos atraso e menos sobrecarga. Veja a seção *TCP e UDP*;
 * **Camada 03 - Rede:** faz o **endereçamento lógico** (endereço IP) e determina o caminho e a lógica de **roteamento** dos **pacotes** entre redes diferentes. É a casa do **IPv4** e do **IPv6**. Dispositivo típico: **roteador**;
 * **Camada 02 - Enlace:** cuida da entrega entre dispositivos **vizinhos**, no mesmo enlace. Monta os **quadros** (*frames*), usa o **endereço físico** (endereço **MAC**, de 48 bits, gravado na placa de rede pelo fabricante, por exemplo `3C:52:82:1A:2B:4F`), detecta erros de transmissão e controla o acesso ao meio. Exemplos: Ethernet (IEEE 802.3) e Wi-Fi (IEEE 802.11). Dispositivo típico: **switch**;
@@ -147,7 +147,7 @@ O mais comum para o ambiente de computadores é o **Estrela**, que também pode 
 
 > **Hub ou switch?** As figuras mostram **hubs** no centro das estrelas, como nas ilustrações clássicas. Nas redes atuais, esse papel é do **switch**. O hub (camada 1) repete tudo para todas as portas, e todos os hosts disputam o mesmo meio; o switch (camada 2) encaminha cada quadro só para a porta do destino, o que dá mais desempenho e mais segurança.
 
-> **E na nuvem?** Numa VPC não há cabos à vista: a topologia é **lógica**, definida pelas sub-redes e pelas **tabelas de rotas**. Mesmo assim, o raciocínio é o mesmo — quem fala com quem, e por qual caminho.
+> **E na nuvem?** Numa VPC não há cabos à vista: a topologia é **lógica**, definida pelas sub-redes e pelas **tabelas de rotas**. Mesmo assim, o raciocínio é o mesmo, quem fala com quem, e por qual caminho.
 
 ## TCP e UDP
 
@@ -175,7 +175,7 @@ Depois disso, o TCP numera os segmentos, confirma o recebimento (ACK), **retrans
 
 O UDP é **sem conexão**: envia cada **datagrama** sem handshake, sem confirmação, sem retransmissão e sem garantia de ordem. Parece pior, mas é justamente o que certas aplicações precisam: numa chamada de voz, um trecho de áudio que chega atrasado já não serve para nada, e retransmiti-lo só pioraria o atraso.
 
-**Analogia:** o TCP é como uma encomenda registrada com aviso de recebimento — se o aviso não volta, a encomenda é reenviada, e as caixas são numeradas para serem abertas na ordem certa. O UDP é como distribuir panfletos: rápido e barato, mas ninguém confirma se cada um chegou.
+**Analogia:** o TCP é como uma encomenda registrada com aviso de recebimento, se o aviso não volta, a encomenda é reenviada, e as caixas são numeradas para serem abertas na ordem certa. O UDP é como distribuir panfletos: rápido e barato, mas ninguém confirma se cada um chegou.
 
 ### Comparação
 
@@ -565,7 +565,7 @@ print("Último útil:      ", hosts[-1])
 print("Hosts possíveis:  ", len(hosts))
 ```
 
-O parâmetro `strict=False` permite passar um endereço de host (como o `.43`); o Python calcula a rede sozinho. Também dá para testar se uma sub-rede está dentro de outra com `subnet_of()` — guarde essa dica para a questão **g** logo abaixo.
+O parâmetro `strict=False` permite passar um endereço de host (como o `.43`); o Python calcula a rede sozinho. Também dá para testar se uma sub-rede está dentro de outra com `subnet_of()`, guarde essa dica para a questão **g** logo abaixo.
 
 Para ver o endereço e a máscara do seu próprio computador: `ip addr` (Linux), `ifconfig` (macOS) ou `ipconfig` (Windows).
 
@@ -670,7 +670,7 @@ Outras divisões são válidas (por exemplo, sub-redes /25 para deixar espaço l
 
 # Desafio
 
-A título de curiosidade, as faixas de IP usadas em redes locais — e na sua VPC — são as faixas **privadas**, definidas no RFC 1918. Qualquer organização pode usá-las internamente sem pedir autorização a ninguém, mas elas **não são roteadas na Internet pública**: para sair para a Internet, o tráfego passa por **NAT** (na VPC, quem faz essa tradução é o Internet Gateway, para instâncias com IP público, e o NAT Gateway, para a sub-rede privada). Por isso, às vezes elas são chamadas informalmente de faixas "gratuitas", mas o termo correto é **privadas**.
+A título de curiosidade, as faixas de IP usadas em redes locais (e na sua VPC) são as faixas **privadas**, definidas no RFC 1918. Qualquer organização pode usá-las internamente sem pedir autorização a ninguém, mas elas **não são roteadas na Internet pública**: para sair para a Internet, o tráfego passa por **NAT** (na VPC, quem faz essa tradução é o Internet Gateway, para instâncias com IP público, e o NAT Gateway, para a sub-rede privada). Por isso, às vezes elas são chamadas informalmente de faixas "gratuitas", mas o termo correto é **privadas**.
 
 > Curiosidade: justamente porque o IPv4 **público** é escasso, provedores de nuvem como a AWS passaram a cobrar por endereço IPv4 público a partir de 2024.
 
@@ -707,7 +707,7 @@ Link: *(a ser inserido pelo professor)*
 - DEERING, S.; HINDEN, R. **RFC 8200**: Internet Protocol, Version 6 (IPv6) Specification. IETF, 2017. Disponível em: https://www.rfc-editor.org/rfc/rfc8200.
 - EDDY, W. (ed.). **RFC 9293**: Transmission Control Protocol (TCP). IETF, 2022. Disponível em: https://www.rfc-editor.org/rfc/rfc9293.
 - FULLER, V.; LI, T. **RFC 4632**: Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan. IETF, 2006. Disponível em: https://www.rfc-editor.org/rfc/rfc4632.
-- ISO/IEC. **ISO/IEC 7498-1:1994**: Information technology — Open Systems Interconnection — Basic Reference Model: The Basic Model. Genebra: ISO, 1994.
+- ISO/IEC. **ISO/IEC 7498-1:1994**: Information technology (Open Systems Interconnection) Basic Reference Model: The Basic Model. Genebra: ISO, 1994.
 - KUROSE, J. F.; ROSS, K. W. **Redes de computadores e a Internet**: uma abordagem top-down. 6. ed. São Paulo: Pearson, 2013.
 - KUROSE, J. F.; ROSS, K. W. **Computer networking**: a top-down approach. 8th ed. Hoboken: Pearson, 2020.
 - MOGUL, J.; POSTEL, J. **RFC 950**: Internet Standard Subnetting Procedure. IETF, 1985. Disponível em: https://www.rfc-editor.org/rfc/rfc950.
@@ -719,101 +719,8 @@ Link: *(a ser inserido pelo professor)*
 - TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. **Computer networks**. 6th ed. Hoboken: Pearson, 2021.
 
 
----
-
-# Relatório da auditoria pedagógica
-
-> **Seção destinada ao docente — remover antes de publicar para os estudantes.**
-> Material auditado: `m07cc-semana08-main/README.md` e figuras da pasta `imgs/`. Contexto: Ciência da Computação, Inteli.
-
-## 1. Parecer geral
-
-A instrução tem pontos fortes claros: conecta o conteúdo ao projeto (a VPC da empresa parceira), traz um exemplo resolvido passo a passo em binário, oferece uma sequência de exercícios com gabarito e fecha com uma atividade de aplicação (*Agora pense!*) e um desafio. **Todos os gabaritos numéricos originais estão corretos** (conferidos um a um com o módulo `ipaddress` do Python; veja a seção 5).
-
-Os problemas encontrados são de quatro tipos: **erros conceituais** que podem se fixar como concepções equivocadas (a sigla do CIDR, que diz "Classes" quando significa justamente "Classless"; a sigla do OSI; "na rede local só se usa IPv4"; a camada de aplicação como "o que aparece na tela"; o último endereço útil como "penúltimo do broadcast"); **conteúdo prometido e não entregue** (TCP e UDP aparecem na introdução, mas recebem uma única linha); **lacunas que afetam diretamente o projeto** (a AWS reserva 5 endereços por sub-rede, e não 2, o que muda a resposta de "quantos hosts cabem"; e o texto não explica o que torna uma sub-rede pública ou privada); e **andaimes pedagógicos ausentes** (sem objetivos de aprendizagem, sem revisão do pré-requisito de binário, sem a operação AND nomeada, exemplos 02 a 05 só com respostas, sem as resoluções).
-
-Nesta versão, **nenhum conteúdo do original foi excluído sem substituição**: todos os tópicos, figuras, o vídeo, as analogias (cinema, frete, tradutor), os cinco exemplos, as respostas, o *Agora pense!*, o Desafio e o Kahoot foram mantidos; os trechos com problema foram reescritos no mesmo lugar. A numeração dos exemplos também foi preservada, para não quebrar referências em slides ou no Kahoot.
-
-## 2. O que foi removido ou corrigido
-
-| # | Trecho original | Problema | Como ficou |
-|-|-|-|-|
-| 1 | "Existe dois tipos de redes: Local (PAN, LAN, MAN) / Mundial (WAN)" | A classificação por abrangência tem quatro níveis; a MAN não é uma rede local; a dicotomia "local x mundial" não existe na literatura | Tabela PAN, LAN, MAN e WAN por abrangência, com meios e exemplos |
-| 2 | Tipos de rede definidos pelo meio ("feita de fibra óptica e rádio tipo minilink") | O meio físico não define o tipo de rede; fibra aparece em LAN, MAN e WAN | Os meios foram mantidos como "mais comuns em cada escala", não como definição |
-| 3 | "A Internet se mistura com uma WAN" | Vago e impreciso | A Internet como "rede de redes" que falam TCP/IP |
-| 4 | "Ambas as redes servem para conectar os hosts (...) numa grande rede chamada Internet" | "Ambas" quando são quatro tipos; nem toda rede está ligada à Internet | Reescrito, com a distinção entre hosts e dispositivos intermediários |
-| 5 | "Opened Standard Interconnection" | Sigla errada | *Open Systems Interconnection* (ISO/IEC 7498-1) |
-| 6 | "Não existe essas camadas na vida real e não correspondem à nenhuma placa" | Incorreto: o modelo é de referência, mas as funções existem, e as camadas 1 e 2 são implementadas justamente na placa de rede | Explicação de onde cada grupo de camadas é implementado (NIC, sistema operacional, aplicação) |
-| 7 | Camada 7: "cuida de tudo o que aparece na sua tela" | Concepção equivocada frequente: interface gráfica não é camada de aplicação | Camada de aplicação como protocolos que oferecem serviços de rede às aplicações, com o contraexemplo navegador x HTTP |
-| 8 | Camada 5: "o serviço ficará disponível para você por X minutos ou horas" | Sugere duração predeterminada, o que não é função da camada de sessão | Analogia do cinema mantida, com a ressalva sobre duração e exemplos de funções reais de sessão |
-| 9 | Camada 4: "É o frete de pacotes" / "TCP garante a entrega" | "Pacote" é a PDU da camada 3; o TCP é confiável, mas nenhum protocolo garante entrega com a rede fora do ar | Analogia do frete mantida com "segmentos"; nota sobre confiabilidade x garantia |
-| 10 | Camada 2: "o chassis da placa que trafega dados" | Termo incorreto e confuso | Endereço MAC gravado na placa, quadros, detecção de erros e switch |
-| 11 | "Contudo, na rede local, só se usa o IPV4" | Falso: IPv6 é ativado por padrão nos sistemas atuais, pilha dupla é comum, e a AWS suporta IPv6 em VPCs | "Nesta instrução, os cálculos serão só com IPv4", com explicação do uso real de IPv6 em LANs |
-| 12 | "As redes de computadores servem para criar hierarquias (...)" / "As redes geralmente não se conversam" | Confunde rede com segmentação; redes se comunicam via roteador, e é a política que restringe | Reescrito: segmentação cria a hierarquia; roteador + tabelas de rotas, firewalls, ACLs e security groups controlam a comunicação |
-| 13 | "CIDR (Classes Inter-Domain Routing)" | **Erro grave:** é *Classless*, ou seja, o oposto de "classes" | Sigla corrigida, com a explicação histórica das classes A a E |
-| 14 | "(...) precisamos do CIDR para organizar essas redes dentro de redes" | Sub-redes já existiam dentro das classes (RFC 950, 1985); o CIDR generalizou os prefixos | Contextualizado na subseção *Por que "sem classes"?* |
-| 15 | Tabela de uma célula "Fazer conversão de binária para decimal" | Pré-requisito anunciado sem nenhum apoio | Tabela mantida e seguida de revisão: pesos dos bits, valores válidos de octeto de máscara, potências de 2 e fórmulas |
-| 16 | "6 bits irrelevantes marcados por x" e "A parte de hosts é indicada com 0 ou X" (na máscara) | Bits de host não são irrelevantes; na máscara, os bits de host são sempre 0 (a tabela original escrevia `1 1 X X X X X X` e dava 192, o que só vale se X = 0) | Notação X mantida, mas definida como marcação visual do **endereço**, e máscara escrita com zeros |
-| 17 | "Compare com a máscara e encontre os bits flexíveis X" | A operação não era nomeada | Operação AND bit a bit explicitada, preservando o passo a passo com X |
-| 18 | "É sempre o penúltimo endereço do broadcast" | Errado: é o endereço imediatamente anterior ao broadcast (o penúltimo **da faixa**) | Corrigido |
-| 19 | "Entender como a sub-rede pública da empresa isola a sub-rede privada" | Quem isola são as tabelas de rotas, o NAT, os security groups e as ACLs, não a sub-rede pública | Reescrito, com os mecanismos nomeados |
-| 20 | "Faixas de IP gratuitas" | O termo técnico é faixas **privadas** (RFC 1918) | Corrigido, com nota explicando o uso informal de "gratuitas" |
-| 21 | "Faixa Classe:" (três vezes, incompleto) | Enunciado truncado | Completado como "Faixa classe A/B/C" |
-| 22 | Imagens com `src="https://github.com/agodoi/SubRedes/blob/main/imgs/..."` | Dependem de **outro** repositório (se ele for renomeado, apagado ou tornado privado, as imagens somem), usam a URL `blob` em vez da imagem bruta e não têm texto alternativo | Caminhos relativos para a pasta `imgs/` deste próprio repositório, onde as figuras já estão, com texto alternativo (`alt`) para acessibilidade |
-| 23 | "Alguns destaques da figura" antes do título "Modelo OSI" | Ordem invertida | Título, texto e figura reorganizados |
-| 24 | Link "VÍDEO" sem contexto | O estudante não sabe o que vai ver nem por que isso importa num curso de Computação | Título do vídeo, relação com a camada 1, padrões T568A/T568B, limite de 100 m e perguntas de observação |
-| 25 | Cabeçalho do Exemplo 04 ("## Exemplo 04: 10.0.128.0/17" + "### Dado o IP") diferente dos demais | Inconsistência | Padronizado como nos demais exemplos |
-| 26 | Enunciados alternando "primeiro IPV4 disponível" e "primeiro IP útil" | Terminologia inconsistente | Padronizado como "primeiro/último endereço IPv4 utilizável" (as palavras "útil" das respostas originais foram mantidas) |
-| 27 | Erros de digitação e concordância: "Enteder", "desses sub-redes", "Existe dois", "impressores", "comunincam", "detaques", "É a cada do" (2x), "dentro de numa", "semopre", "Numas das instruções", "Justique", "rede-sub", "IPV4/IPV6" | Revisão textual | Corrigidos ("Entender", "dessas sub-redes", "Existem", "impressoras", "comunicam", "destaques", "É a casa do", "dentro de uma", "sempre", "Numa das instruções", "Justifique", "sub-rede", "IPv4/IPv6") |
-
-## 3. O que foi inserido nesta versão
-
-| Inserção | Onde | Justificativa |
-|-|-|-|
-| Objetivos de aprendizagem e pré-requisitos | Início | Tornam explícito o que o estudante deve saber fazer ao final e permitem autoavaliação |
-| Explicação de "camada N para camada N", com analogia da encomenda | *Comunicação em camadas* | A frase original era correta, mas opaca para quem vê o tema pela primeira vez |
-| Nomes das PDUs (segmento, pacote, quadro, bits) e encapsulamento | *Modelo OSI* | Evita a confusão "pacote" x "segmento" x "quadro", que aparecia no próprio texto |
-| Modelo TCP/IP e correspondência com o OSI | *Modelo OSI* | É o modelo que a Internet (e a AWS) usa de fato; ausente no original |
-| Dispositivos por camada (hub, switch, roteador, firewall) | *Modelo OSI* | Ancora as camadas em objetos concretos e prepara a discussão sobre hub x switch das topologias |
-| Notas críticas sobre a figura do OSI | *Alguns destaques da figura* | A figura posiciona TLS, ARP, SIP, RTP e Sockets de forma discutível; a nota evita que o erro seja aprendido |
-| Descrição, vantagem e desvantagem de cada topologia | *Topologias de Redes* | O original mostrava a figura sem explicar nenhuma topologia |
-| Nota "hub ou switch?" e topologia lógica na nuvem | *Topologias de Redes* | As figuras usam hubs, que estão obsoletos; a VPC tem topologia lógica, não física |
-| **Seção completa de TCP e UDP**: portas, three-way handshake (diagrama), comparação, analogia, casos de uso, HTTP/3 sobre QUIC e tabela de portas do projeto | Nova seção | Estava prometida na introdução e não existia; as portas são indispensáveis para escrever regras de security group |
-| Leitura crítica da figura IPv4 x IPv6 e tabela complementar | *Protocolo IPv4 vs IPv6* | Datas da figura são de especificação, não de implantação; faltava a ausência de broadcast no IPv6, que conversa diretamente com os exercícios |
-| Classes A a E e motivo do "sem classes" | *Redes e Sub-redes* | Dá sentido ao nome CIDR e aos rótulos "classe A/B/C" do Desafio |
-| Tabela de endereços especiais (loopback, link-local, `0.0.0.0/0`, CGNAT) | *Redes e Sub-redes* | São endereços que os estudantes encontram no console da AWS e no terminal |
-| Revisão de binário, valores de máscara, potências de 2 e fórmulas | *O que você precisa saber* | O pré-requisito era anunciado, mas não apoiado |
-| Fórmula 2<sup>h</sup> − 2 já no Exemplo 01, e 2<sup>h</sup> − 5 da AWS | Exemplo 01 e seguintes | No original a fórmula só aparecia, sem explicação, nas respostas dos Exemplos 04 e 05 |
-| Atalho do tamanho do bloco | Após o Exemplo 01 | Método rápido usado na prática e em certificações, apresentado **depois** do binário, para não substituir o entendimento |
-| Resolução comentada dos Exemplos 02 a 05, em blocos recolhíveis | Exemplos 02 a 05 | O original só dava as respostas; o Exemplo 02 é o primeiro com host no meio da faixa e precisava mostrar o AND funcionando; o Exemplo 03 ganhou a "pegadinha" do .255 válido |
-| Conferência com o módulo `ipaddress` do Python | Após os exemplos | Aproveita o perfil de Computação e dá ao estudante um verificador independente; código testado |
-| Diagrama da VPC e explicação do que torna uma sub-rede pública ou privada | *Agora pense!* | Esclarece que ambas usam endereços privados e que a diferença está na tabela de rotas |
-| Questões h a k (espaço livre, 5 endereços reservados da AWS, duas AZs, regra de security group) | *Agora, projete!* | O título da instrução fala em **projeto** de redes, mas o original só pedia análise de sub-redes dadas; as novas questões pedem que o estudante projete |
-| Gabaritos recolhíveis do *Agora pense!* e do Desafio | Fim da instrução | Permitem autoestudo sem entregar a resposta de imediato |
-| Referências (livros-texto, RFCs, documentação da AWS e do Python, NIC.br) | Fim da instrução | O original não tinha nenhuma fonte |
-
-## 4. O que ainda precisa ser inserido (depende do docente)
-
-| Pendência | Por quê | Sugestão |
-|-|-|-|
-| Link do Kahoot | A seção termina sem link | Inserir o link e, se possível, alinhar as perguntas aos objetivos de aprendizagem |
-| Duração e roteiro da instrução | Não há tempo estimado nem indicação do que é síncrono e do que é autoestudo | Distribuir o tempo por bloco (camadas, TCP/UDP, IPv4 x IPv6, cálculo de sub-redes, projeto da VPC) |
-| Confirmar o provedor de nuvem do projeto | As regras de 5 endereços reservados, zonas de disponibilidade e security groups foram escritas para a **AWS** | Se o projeto usar outro provedor, ajustar: cada provedor tem regras próprias de endereços reservados |
-| Figura do OSI em português e com protocolos bem posicionados | A figura atual está em inglês e tem posições discutíveis de protocolos | Redesenhar ou substituir; enquanto isso, as notas inseridas em *Alguns destaques da figura* cobrem o problema |
-| Figuras de estrela e estrela estendida com switches | As figuras mostram hubs, que não são mais usados | Redesenhar com switches; a nota "hub ou switch?" cobre o problema provisoriamente |
-| Fonte e licença das quatro figuras | Nenhuma figura tem crédito | Indicar autoria, origem e licença de uso abaixo de cada imagem |
-| Avaliação do vídeo | "Crimpar cabo de rede com conector RJ45 (igual fábrica)", de 2018, é de um canal voltado a eletricistas e divulga um curso de instalação elétrica | Manter com o roteiro de observação inserido ou trocar por um vídeo técnico mais alinhado a Computação |
-| Atividade prática em ferramenta | O conteúdo ainda é só conceitual e de cálculo | Sugestão: captura no Wireshark do three-way handshake, de uma consulta DNS em UDP e de uma requisição ARP; ou um laboratório no Cisco Packet Tracer |
-| Critério de avaliação ligado ao projeto | Não há indicação de como o domínio do conteúdo aparece no artefato do projeto | Pedir, por exemplo, a tabela de endereçamento da VPC (sub-redes, AZs, CIDRs e regras de security group) como evidência de aprendizagem |
-| Arquivo `imgs/READEME.md` | Arquivo vazio, com nome errado | Remover ou renomear para `README.md` com a lista e o crédito das figuras |
-| Nome do arquivo `imgs/estrela_extendida.png` | "Extendida" não existe em português ("estendida") | Renomear e atualizar o link no README (não renomeei para não quebrar outros materiais que apontem para ele) |
-| Edição das referências | Citei a 6ª edição em português de Kurose e Ross (Pearson, 2013) e as edições mais recentes em inglês | Conferir qual edição está no acervo da biblioteca e ajustar |
-| Extensão opcional: VLSM | O projeto usa sub-redes de mesmo tamanho | Se houver tempo, um exercício com sub-redes de tamanhos diferentes (VLSM) aprofunda o "projeto" de redes |
-| Extensão opcional: IPv6 na VPC | Ficou apenas como leitura | Em uma próxima instrução, associar um bloco IPv6 à VPC do projeto |
 
 ## 5. Conferência dos gabaritos
-
-Todos os cálculos foram conferidos com o módulo `ipaddress` do Python.
 
 | Exercício | Máscara | Rede | 1º útil | Broadcast | Último útil | Hosts | Hosts na AWS | Original |
 |-|-|-|-|-|-|-|-|-|
@@ -826,5 +733,3 @@ Todos os cálculos foram conferidos com o módulo `ipaddress` do Python.
 | Pública — 192.168.0.0/24 | 255.255.255.0 | 192.168.0.0 | 192.168.0.1 | 192.168.0.255 | 192.168.0.254 | 254 | 251 | Sem gabarito no original (inserido) |
 | Privada — 192.168.1.0/24 | 255.255.255.0 | 192.168.1.0 | 192.168.1.1 | 192.168.1.255 | 192.168.1.254 | 254 | 251 | Sem gabarito no original (inserido) |
 | Desafio — faixas privadas | — | 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 | — | — | — | — | — | Sem gabarito no original (inserido) |
-
-A exceção fica por conta da AWS: nenhum exercício do original considerava os 5 endereços reservados por sub-rede, o que muda a resposta de "quantos hosts cabem" justamente nas sub-redes do projeto.
